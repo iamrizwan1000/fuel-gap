@@ -34,13 +34,6 @@
     },
     "plugins": [
       "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "backgroundColor": "#E8175D",
-          "resizeMode": "contain"
-        }
-      ],
       "expo-image",
       [
         "expo-notifications",
@@ -53,6 +46,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "58a25822-b616-4c7a-8963-868f0f0bcfc2"
+      }
     }
   }
 }
