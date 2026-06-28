@@ -112,7 +112,7 @@ Or upload `.aab` manually at [play.google.com/console](https://play.google.com/c
 
 ### Required Inputs for Google Play Console
 - **App name:** FuelGap
-- **Short description (max 80 chars):** Track your daily macros. Search thousands of foods from the USDA database.
+- **Short description (max 80 chars):** Track your daily macros with thousands of foods at your fingertips.
 - **Full description (max 4000 chars):** --- *(use description below)*
 - **Screenshots:** 2-8 phone (minimum 2), 2-8 tablet (minimum 2) — 1080×1920 or larger
 - **Feature graphic:** 1024×500 PNG or JPG
@@ -176,7 +176,7 @@ Or use Transporter app to upload `.ipa`.
 - **App Review Information:**
   - Demo account: None required (no sign-up)
   - Contact info: your-email@example.com
-  - Notes for reviewer: Simple macro tracking app. No sign-up. All 7,000+ USDA foods searchable offline.
+  - Notes for reviewer: Simple macro tracking app. No sign-up. All food data searchable offline.
 - **Version Release:** Manual or automatic
 
 ---
@@ -328,7 +328,7 @@ eas credentials --platform ios
 
 ### Short Description (Android — max 80 chars)
 ```
-Track your daily macros with thousands of USDA foods at your fingertips.
+Track your daily macros with thousands of foods at your fingertips.
 ```
 
 ### Short Description (iOS — max 30 chars)
@@ -346,7 +346,7 @@ Track what you eat
 FuelGap makes it easy to track your daily nutrition with a clean, simple interface.
 
 SEARCH ANY FOOD
-Browse over 7,000 foods from the official USDA database — fruits, vegetables, meats, grains, dairy, and more. Each food shows its calories, protein, carbs, and fat per 100g. Search by name or category and find what you need instantly.
+Browse thousands of foods — fruits, vegetables, meats, grains, dairy, and more. Each food shows its calories, protein, carbs, and fat per 100g. Search by name or category and find what you need instantly.
 
 LOG YOUR MEALS
 Select your portion size using grams, cups, pieces, or spoons. Tap "I Ate This" and it's logged. No accounts. No subscriptions. No complicated forms.
@@ -361,19 +361,19 @@ DESIGNED FOR TABLETS
 Works beautifully on phones, 7" tablets, and 10" tablets. The interface adapts to any screen size.
 
 OFFLINE FIRST
-All 7,000+ foods are stored locally on your device. No internet connection needed after installation.
+All food data is stored locally on your device. No internet connection needed after installation.
 
 No ads. No tracking. No account required. Just a straightforward macro tracker that works.
 ```
 
 ### Keywords (iOS — max 100 chars)
 ```
-nutrition,calorie counter,macro tracker,food diary,diet tracker,fitness,usda,protein,carbs,fat
+nutrition,calorie counter,macro tracker,food diary,diet tracker,fitness,protein,carbs,fat
 ```
 
 ### Promotional Text (iOS — max 170 chars)
 ```
-Track your daily macros with thousands of USDA foods. Simple, fast, and works offline. No account needed.
+Track your daily macros with thousands of foods. Simple, fast, and works offline. No account needed.
 ```
 
 ### App Category
