@@ -26,8 +26,8 @@ export default function SearchScreen() {
 
   const titleSize = Math.min(width * 0.07, 28);
   const titleH = titleSize + 6;
-  const topPad = 40;
-  const headerAreaHeight = topPad + 16 + titleH + 20 + 52 + 8;
+  const topPad = Math.max(insets.top, 16);
+  const headerAreaHeight = topPad + 16 + titleH + 20 + 52 + 20;
 
   const filtered = useMemo(
     () =>
@@ -71,9 +71,9 @@ export default function SearchScreen() {
                 </Text>
                 <Text style={s.cardCategory}>{item.category}</Text>
                 <View style={s.microRow}>
-                  <MicroBadge label="P" value={`${item.proteinPer100g}g`} />
-                  <MicroBadge label="C" value={`${item.carbsPer100g}g`} />
-                  <MicroBadge label="F" value={`${item.fatPer100g}g`} />
+                  <MicroBadge label="Protein" value={`${item.proteinPer100g}g`} bg="#DBEAFE" color="#1E40AF" />
+                  <MicroBadge label="Carbs" value={`${item.carbsPer100g}g`} bg="#FEF3C7" color="#92400E" />
+                  <MicroBadge label="Fat" value={`${item.fatPer100g}g`} bg="#FCE7F3" color="#9D174D" />
                 </View>
               </View>
               <View style={s.calBox}>
@@ -117,11 +117,11 @@ export default function SearchScreen() {
   );
 }
 
-function MicroBadge({ label, value }: { label: string; value: string }) {
+function MicroBadge({ label, value, bg, color }: { label: string; value: string; bg: string; color: string }) {
   return (
-    <View style={mb.container}>
-      <Text style={mb.label}>{label}</Text>
-      <Text style={mb.value}>{value}</Text>
+    <View style={[mb.container, { backgroundColor: bg }]}>
+      <Text style={[mb.label, { color }]}>{label}</Text>
+      <Text style={[mb.value, { color }]}>{value}</Text>
     </View>
   );
 }
@@ -159,7 +159,7 @@ const s = StyleSheet.create({
     width: "100%",
   },
   card: {
-    marginBottom: 12,
+    marginBottom: 14,
     borderRadius: 12,
     backgroundColor: "#FFFFFF",
     overflow: "hidden",
@@ -175,7 +175,7 @@ const s = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 16,
-    paddingVertical: 14,
+    paddingVertical: 16,
   },
   emojiBox: {
     width: 52,
@@ -187,7 +187,7 @@ const s = StyleSheet.create({
     marginRight: 14,
   },
   emoji: {
-    fontSize: 26,
+    fontSize: 28,
   },
   cardInfo: {
     flex: 1,
@@ -206,8 +206,8 @@ const s = StyleSheet.create({
   },
   microRow: {
     flexDirection: "row",
-    gap: 6,
-    marginTop: 6,
+    gap: 8,
+    marginTop: 8,
   },
   calBox: {
     alignItems: "flex-end",

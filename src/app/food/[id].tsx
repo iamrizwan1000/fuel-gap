@@ -176,13 +176,13 @@ const s = StyleSheet.create({
   },
   hero: {
     alignItems: "center",
-    marginBottom: 24,
+    marginBottom: 16,
   },
   heroRow: {
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
-    marginBottom: 16,
+    marginBottom: 6,
   },
   heroCenter: {
     flex: 1,
