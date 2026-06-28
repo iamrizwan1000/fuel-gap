@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   FlatList,
   Platform,
@@ -12,15 +12,18 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useWindowDimensions } from "react-native";
 import { useRouter } from "expo-router";
 import { Search } from "lucide-react-native";
+import { useSQLiteContext } from "expo-sqlite";
 
-import { useAppStore } from "@/store/useAppStore";
+import { searchFoods } from "@/db";
+import type { Food } from "@/types/food";
 
 export default function SearchScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
   const [query, setQuery] = useState("");
-  const foods = useAppStore((s) => s.foods);
+  const [foods, setFoods] = useState<Food[]>([]);
+  const db = useSQLiteContext();
   const isWeb = Platform.OS === "web";
   const maxWidth = isWeb ? Math.min(width, 640) : width;
 
@@ -29,17 +32,9 @@ export default function SearchScreen() {
   const topPad = Math.max(insets.top, 16);
   const headerAreaHeight = topPad + 16 + titleH + 20 + 52 + 20;
 
-  const filtered = useMemo(
-    () =>
-      query.trim()
-        ? foods.filter(
-            (f) =>
-              f.name.toLowerCase().includes(query.toLowerCase()) ||
-              f.category.toLowerCase().includes(query.toLowerCase())
-          )
-        : foods,
-    [query, foods]
-  );
+  useEffect(() => {
+    searchFoods(db, query).then(setFoods);
+  }, [db, query]);
 
   return (
     <View style={s.screen}>
@@ -50,7 +45,7 @@ export default function SearchScreen() {
           paddingBottom: 20,
           paddingHorizontal: 16,
         }}
-        data={filtered}
+        data={foods}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (

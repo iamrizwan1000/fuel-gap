@@ -2,12 +2,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { foods as defaultFoods } from "@/data/foods";
 import { DailyTargets, Food, LogEntry } from "@/types/food";
 import { calculateMacros, generateId } from "@/utils/nutrition";
 
 type AppState = {
-  foods: Food[];
   log: LogEntry[];
   targets: DailyTargets;
 };
@@ -29,7 +27,6 @@ const defaultTargets: DailyTargets = {
 export const useAppStore = create<AppState & AppActions>()(
   persist(
     (set) => ({
-      foods: defaultFoods,
       log: [],
       targets: defaultTargets,
 

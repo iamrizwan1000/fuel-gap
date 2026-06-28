@@ -233,11 +233,11 @@ When you run `eas build --platform ios` for the first time:
 
 ## 7. Environment Variables
 
-The USDA API key (`USDA_API_KEY` in `.env.local`) is **only** used by:
+The USDA API key (`USDA_API_KEY` in `.env.local`) is used by:
 ```
-npm run fetch-foods
+npm run build-db
 ```
-to generate `src/data/foods.ts`. The data is compiled into the app bundle — no API key needed at runtime.
+to generate `assets/foods.db`. This SQLite database is bundled with the app for fast offline search. Re-run this command if you want to refresh the food database.
 
 **Important:** Ensure `.env.local` is in `.gitignore` so the API key is never committed.
 

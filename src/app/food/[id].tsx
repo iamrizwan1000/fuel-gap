@@ -1,23 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Platform, Pressable, ScrollView, Text, View, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useWindowDimensions } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ArrowLeft, Minus, Plus } from "lucide-react-native";
+import { useSQLiteContext } from "expo-sqlite";
 
+import { getFoodById } from "@/db";
 import { useAppStore } from "@/store/useAppStore";
 import { calculateMacros } from "@/utils/nutrition";
+import type { Food } from "@/types/food";
 
 export default function FoodDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
-  const foods = useAppStore((s) => s.foods);
+  const [food, setFood] = useState<Food | null>(null);
+  const db = useSQLiteContext();
   const addToLog = useAppStore((s) => s.addToLog);
   const isWeb = Platform.OS === "web";
 
-  const food = foods.find((f) => f.id === id);
+  useEffect(() => {
+    getFoodById(db, id).then(setFood);
+  }, [db, id]);
 
   const [selectedUnit, setSelectedUnit] = useState(food?.servingOptions[0] ?? { label: "g", grams: 1 });
   const [quantity, setQuantity] = useState(1);

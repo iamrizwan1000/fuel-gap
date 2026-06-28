@@ -16,6 +16,7 @@
     "expo-notifications": "~56.0.18",
     "expo-router": "~56.2.11",
     "expo-splash-screen": "~56.0.10",
+    "expo-sqlite": "~56.0.5",
     "expo-status-bar": "~56.0.4",
     "expo-symbols": "~56.0.6",
     "expo-system-ui": "~56.0.5",
@@ -37,8 +38,10 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^26.0.1",
     "@types/react": "~19.2.2",
+    "better-sqlite3": "^12.11.1",
     "eslint": "^9.0.0",
     "eslint-config-expo": "~56.0.4",
     "prettier-plugin-tailwindcss": "^0.5.14",
@@ -52,7 +55,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "fetch-foods": "tsx --env-file=.env.local scripts/fetch-foods.ts"
+    "build-db": "tsx --env-file=.env.local scripts/build-db.ts"
   },
   "private": true
 }

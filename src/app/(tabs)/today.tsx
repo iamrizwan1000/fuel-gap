@@ -1,31 +1,48 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useWindowDimensions } from "react-native";
 import { useRouter } from "expo-router";
 import { X } from "lucide-react-native";
+import { useSQLiteContext } from "expo-sqlite";
 
+import { searchFoods } from "@/db";
 import { MacroBar } from "@/components/MacroBar";
 import { SuggestionChips } from "@/components/SuggestionChips";
 import { useAppStore } from "@/store/useAppStore";
-import { DailyTargets } from "@/types/food";
+import type { DailyTargets, Food } from "@/types/food";
 import { getRemaining, getSuggestions, sumMacros } from "@/utils/nutrition";
 
 export default function TodayScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
+  const db = useSQLiteContext();
   const log = useAppStore((s) => s.log);
   const targets = useAppStore((s) => s.targets);
   const setTargets = useAppStore((s) => s.setTargets);
   const removeFromLog = useAppStore((s) => s.removeFromLog);
-  const foods = useAppStore((s) => s.foods);
+  const [foods, setFoods] = useState<Food[]>([]);
   const [editing, setEditing] = useState(false);
   const [editTargets, setEditTargets] = useState<DailyTargets>({ ...targets });
 
   const totals = sumMacros(log);
   const remaining = getRemaining(totals, targets);
   const suggestions = getSuggestions(remaining, foods);
+
+  useEffect(() => {
+    searchFoods(db, "").then(setFoods);
+  }, [db]);
+
+  const handleSuggestion = useCallback(
+    (name: string) => {
+      const food = foods.find(
+        (f) => f.name.toLowerCase() === name.toLowerCase()
+      );
+      if (food) router.push(`/food/${food.id}`);
+    },
+    [foods, router]
+  );
 
   const titleSize = Math.min(width * 0.07, 28);
   const titleH = titleSize + 6;
@@ -106,14 +123,7 @@ export default function TodayScreen() {
               <Text style={s.sectionTitle}>Fill the gap</Text>
               <SuggestionChips
                 suggestions={suggestions}
-                onPress={(name) => {
-                  const food = foods.find(
-                    (f) => f.name.toLowerCase() === name.toLowerCase()
-                  );
-                  if (food) {
-                    router.push(`/food/${food.id}`);
-                  }
-                }}
+                onPress={handleSuggestion}
               />
             </View>
           )}
