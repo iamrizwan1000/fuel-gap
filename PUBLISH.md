@@ -111,18 +111,18 @@ eas submit --platform android
 Or upload `.aab` manually at [play.google.com/console](https://play.google.com/console).
 
 ### Required Inputs for Google Play Console
-- **Store listing:**
-  - App name (max 30 chars)
-  - Short description (max 80 chars)
-  - Full description (max 4000 chars)
-  - Screenshots: 2-8 phone (minimum 2), 2-8 tablet (minimum 2) — 1080×1920 or larger
-  - Feature graphic: 1024×500 PNG or JPG
-  - App category + tags
-  - Email contact
-  - Privacy policy URL (can use [privacypolicies.com](https://privacypolicies.com) to generate)
+- **App name:** FuelGap
+- **Short description (max 80 chars):** Track your daily macros. Search thousands of foods from the USDA database.
+- **Full description (max 4000 chars):** --- *(use description below)*
+- **Screenshots:** 2-8 phone (minimum 2), 2-8 tablet (minimum 2) — 1080×1920 or larger
+- **Feature graphic:** 1024×500 PNG or JPG
+- **App category:** Health & Fitness
+- **Tags:** nutrition, calorie counter, macro tracker, food diary, diet tracker, fitness
+- **Email contact:** your-email@example.com
+- **Privacy policy URL:** Use [privacypolicies.com](https://privacypolicies.com) to generate one
 - **Content rating:** Complete questionnaire (answers determine age rating)
 - **App signing:** Google manages app signing key by default (recommended)
-- **Pricing & distribution:** Free or paid, select countries
+- **Pricing & distribution:** Free, all countries
 
 ---
 
@@ -174,9 +174,9 @@ Or use Transporter app to upload `.ipa`.
   - 5.5" display (1242×2208) — required
   - iPhone screenshots can be reused with scaling
 - **App Review Information:**
-  - Demo account (if login required)
-  - Contact info
-  - Notes for reviewer
+  - Demo account: None required (no sign-up)
+  - Contact info: your-email@example.com
+  - Notes for reviewer: Simple macro tracking app. No sign-up. All 7,000+ USDA foods searchable offline.
 - **Version Release:** Manual or automatic
 
 ---
@@ -321,3 +321,63 @@ eas build:list
 # Clear credentials (if stuck on iOS)
 eas credentials --platform ios
 ```
+
+---
+
+## 12. App Store Descriptions
+
+### Short Description (Android — max 80 chars)
+```
+Track your daily macros with thousands of USDA foods at your fingertips.
+```
+
+### Short Description (iOS — max 30 chars)
+```
+Macro Tracker
+```
+
+### Subtitle (iOS — max 30 chars)
+```
+Track what you eat
+```
+
+### Full Description (both stores — 4000 chars max)
+```
+FuelGap makes it easy to track your daily nutrition with a clean, simple interface.
+
+SEARCH ANY FOOD
+Browse over 7,000 foods from the official USDA database — fruits, vegetables, meats, grains, dairy, and more. Each food shows its calories, protein, carbs, and fat per 100g. Search by name or category and find what you need instantly.
+
+LOG YOUR MEALS
+Select your portion size using grams, cups, pieces, or spoons. Tap "I Ate This" and it's logged. No accounts. No subscriptions. No complicated forms.
+
+SEE YOUR DAILY PROGRESS
+Your logged meals are tallied into a clear daily summary. A remaining-macros card shows what's left, with smart suggestions to help you fill nutritional gaps.
+
+DAILY REMINDERS
+Optional notifications at lunchtime and evening help you stay consistent with your logging.
+
+DESIGNED FOR TABLETS
+Works beautifully on phones, 7" tablets, and 10" tablets. The interface adapts to any screen size.
+
+OFFLINE FIRST
+All 7,000+ foods are stored locally on your device. No internet connection needed after installation.
+
+No ads. No tracking. No account required. Just a straightforward macro tracker that works.
+```
+
+### Keywords (iOS — max 100 chars)
+```
+nutrition,calorie counter,macro tracker,food diary,diet tracker,fitness,usda,protein,carbs,fat
+```
+
+### Promotional Text (iOS — max 170 chars)
+```
+Track your daily macros with thousands of USDA foods. Simple, fast, and works offline. No account needed.
+```
+
+### App Category
+| Store | Category |
+|-------|----------|
+| Google Play | Health & Fitness |
+| App Store | Health & Fitness |
