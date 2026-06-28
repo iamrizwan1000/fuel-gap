@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Platform, Pressable, ScrollView, Text, View, StyleSheet } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, TextInput, View, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useWindowDimensions } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -27,6 +27,8 @@ export default function FoodDetailScreen() {
 
   const [selectedUnit, setSelectedUnit] = useState(food?.servingOptions[0] ?? { label: "g", grams: 1 });
   const [quantity, setQuantity] = useState(1);
+  const [inputText, setInputText] = useState("1");
+  const scrollRef = useRef<ScrollView>(null);
 
   if (!food) {
     return (
@@ -55,9 +57,15 @@ export default function FoodDetailScreen() {
         { paddingTop: isWeb ? 0 : insets.top },
       ]}
     >
+      <KeyboardAvoidingView
+        style={s.flex}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+      >
       <ScrollView
+        ref={scrollRef}
         style={s.scroll}
         contentContainerStyle={[s.scrollInner, { maxWidth }]}
+        keyboardShouldPersistTaps="handled"
       >
         <View style={s.hero}>
           <View style={s.heroRow}>
@@ -118,7 +126,37 @@ export default function FoodDetailScreen() {
             >
               <Minus size={20} color="#222222" />
             </Pressable>
-            <Text style={s.stepperValue}>{quantity}</Text>
+            <TextInput
+              style={s.stepperValue}
+              value={inputText}
+              onChangeText={(t) => {
+                setInputText(t);
+                const n = parseInt(t, 10);
+                if (!isNaN(n) && n >= 1) setQuantity(n);
+              }}
+              onBlur={() => {
+                const n = parseInt(inputText, 10);
+                if (isNaN(n) || n < 1) {
+                  setInputText("1");
+                  setQuantity(1);
+                } else {
+                  setInputText(String(n));
+                }
+              }}
+              onSubmitEditing={() => {
+                const n = parseInt(inputText, 10);
+                if (isNaN(n) || n < 1) {
+                  setInputText("1");
+                  setQuantity(1);
+                } else {
+                  setInputText(String(n));
+                  setQuantity(n);
+                }
+              }}
+              keyboardType="number-pad"
+              selectTextOnFocus
+              onFocus={() => scrollRef.current?.scrollToEnd({ animated: true })}
+            />
             <Pressable
               onPress={() => setQuantity(quantity + 1)}
               style={s.stepperBtn}
@@ -140,6 +178,7 @@ export default function FoodDetailScreen() {
           <Text style={s.ctaText}>I Ate This</Text>
         </Pressable>
       </ScrollView>
+      </KeyboardAvoidingView>
     </View>
   );
 }
@@ -279,11 +318,17 @@ const s = StyleSheet.create({
     alignItems: "center",
   },
   stepperValue: {
-    minWidth: 40,
+    width: 64,
+    height: 40,
     textAlign: "center",
     fontSize: 22,
     fontWeight: "700",
     color: "#222222",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#EBEBEB",
+    paddingVertical: 0,
   },
   cta: {
     height: 52,
@@ -302,6 +347,9 @@ const s = StyleSheet.create({
     fontSize: 48,
     textAlign: "center",
     marginBottom: 16,
+  },
+  flex: {
+    flex: 1,
   },
   notFoundText: {
     fontSize: 18,

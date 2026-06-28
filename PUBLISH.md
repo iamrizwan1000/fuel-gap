@@ -119,7 +119,7 @@ Or upload `.aab` manually at [play.google.com/console](https://play.google.com/c
 - **App category:** Health & Fitness
 - **Tags:** nutrition, calorie counter, macro tracker, food diary, diet tracker, fitness
 - **Email contact:** your-email@example.com
-- **Privacy policy URL:** Use [privacypolicies.com](https://privacypolicies.com) to generate one
+- **Privacy policy URL:** Host `PRIVACY.md` (included in project) on GitHub Pages, a personal site, or use a service like [privacypolicies.com](https://privacypolicies.com)
 - **Content rating:** Complete questionnaire (answers determine age rating)
 - **App signing:** Google manages app signing key by default (recommended)
 - **Pricing & distribution:** Free, all countries
