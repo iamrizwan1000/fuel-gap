@@ -4,7 +4,7 @@ import Constants from "expo-constants";
 
 export function useNotifications() {
   useEffect(() => {
-    if ((Constants as any).appOwnership === "expo") {
+    if (Constants.executionEnvironment === "storeClient") {
       return;
     }
 
