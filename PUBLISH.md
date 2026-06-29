@@ -376,6 +376,20 @@ nutrition,calorie counter,macro tracker,food diary,diet tracker,fitness,protein,
 Track your daily macros with thousands of foods. Simple, fast, and works offline. No account needed.
 ```
 
+## 13. Release Notes (What's New)
+
+### Version 1.0.0
+- Search 7,000+ foods instantly — fruits, vegetables, meats, dairy, and more
+- Log meals with customizable portion sizes (grams, cups, pieces, spoons)
+- Track daily calories, protein, carbs, and fat with a clean progress dashboard
+- Smart food suggestions based on your remaining macro targets
+- Detailed food info with color-coded macronutrient badges
+- Manual quantity entry with stepper controls
+- Daily reminder notifications (optional)
+- Animated splash screen
+- Fully offline — no internet or account required
+- Optimized for phones, 7" tablets, and 10" tablets
+
 ### App Category
 | Store | Category |
 |-------|----------|
