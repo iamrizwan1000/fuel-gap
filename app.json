@@ -18,6 +18,7 @@
     },
     "android": {
       "package": "com.fuelgap",
+      "versionCode": 2,
       "adaptiveIcon": {
         "backgroundColor": "#F5F5F5",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
