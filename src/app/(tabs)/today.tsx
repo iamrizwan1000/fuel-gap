@@ -22,6 +22,7 @@ export default function TodayScreen() {
   const targets = useAppStore((s) => s.targets);
   const setTargets = useAppStore((s) => s.setTargets);
   const removeFromLog = useAppStore((s) => s.removeFromLog);
+  const checkDayReset = useAppStore((s) => s.checkDayReset);
   const [foods, setFoods] = useState<Food[]>([]);
   const [editing, setEditing] = useState(false);
   const [editTargets, setEditTargets] = useState<DailyTargets>({ ...targets });
@@ -31,8 +32,9 @@ export default function TodayScreen() {
   const suggestions = getSuggestions(remaining, foods);
 
   useEffect(() => {
+    checkDayReset();
     searchFoods(db, "").then(setFoods);
-  }, [db]);
+  }, [db, checkDayReset]);
 
   const handleSuggestion = useCallback(
     (name: string) => {

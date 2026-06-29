@@ -8,6 +8,7 @@ import { calculateMacros, generateId } from "@/utils/nutrition";
 type AppState = {
   log: LogEntry[];
   targets: DailyTargets;
+  dayKey: string;
 };
 
 type AppActions = {
@@ -15,7 +16,12 @@ type AppActions = {
   removeFromLog: (entryId: string) => void;
   clearLog: () => void;
   setTargets: (targets: DailyTargets) => void;
+  checkDayReset: () => void;
 };
+
+function todayKey() {
+  return new Date().toISOString().slice(0, 10);
+}
 
 const defaultTargets: DailyTargets = {
   calories: 2000,
@@ -26,9 +32,18 @@ const defaultTargets: DailyTargets = {
 
 export const useAppStore = create<AppState & AppActions>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       log: [],
       targets: defaultTargets,
+      dayKey: todayKey(),
+
+      checkDayReset: () => {
+        const { dayKey } = get();
+        const currentDay = todayKey();
+        if (dayKey !== currentDay) {
+          set({ log: [], dayKey: currentDay });
+        }
+      },
 
       addToLog: (food, quantity, unitLabel, unitGrams) => {
         const macros = calculateMacros(food, quantity, unitGrams);
@@ -53,7 +68,7 @@ export const useAppStore = create<AppState & AppActions>()(
         set((state) => ({ log: state.log.filter((e) => e.id !== entryId) }));
       },
 
-      clearLog: () => set({ log: [] }),
+      clearLog: () => set({ log: [], dayKey: todayKey() }),
 
       setTargets: (targets) => set({ targets }),
     }),
@@ -74,6 +89,7 @@ export const useAppStore = create<AppState & AppActions>()(
       partialize: (state) => ({
         log: state.log,
         targets: state.targets,
+        dayKey: state.dayKey,
       }) as AppState & AppActions,
     }
   )
